@@ -78,6 +78,7 @@ export default class TicketTable extends React.Component {
         options={{
           filtering: true,
           toolbar: false,
+          paging: false,
         }}
         localization={{ body: { emptyDataSourceMessage: "還沒有資料耶" } }}
       />
