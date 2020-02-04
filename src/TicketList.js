@@ -4,10 +4,14 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
+import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 
 const useStyles = makeStyles(theme => ({
   header: {
     padding: theme.spacing(4),
+  },
+  icon: {
+    padding: theme.spacing(0.3),
   },
 }));
 
@@ -21,7 +25,9 @@ export default function () {
         direction="row"
         justify="flex-end"
       ><Grid item xs={1}>
-        <Button variant="contained" color="primary">新增</Button>
+          <Button variant="contained" color="primary">
+            <AddBoxRoundedIcon className={classes.icon}/> 新增
+          </Button>
       </Grid>
       </Grid>
       <TicketTable/>
