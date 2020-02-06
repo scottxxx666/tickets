@@ -36,6 +36,7 @@ export default class TicketTable extends React.Component {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref}/>),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref}/>),
   };
+  _title = "待讓票卷";
   _titles = [
     {
       title: "更新時間",
@@ -45,9 +46,6 @@ export default class TicketTable extends React.Component {
       field: "status",
       lookup: { WAITING: "讓票中", END: "已結束" },
       defaultFilter: ["WAITING"],
-    }, {
-      title: "聯絡方式 (Ptt / Line / FB)",
-      field: "contact",
     }, {
       title: "位子",
       field: "seats",
@@ -63,10 +61,11 @@ export default class TicketTable extends React.Component {
     }, {
       title: "備註",
       field: "note",
+    }, {
+      title: "聯絡方式 (Ptt / Line / FB)",
+      field: "contact",
     },
   ];
-
-  _title = "待讓票卷";
 
   render() {
     return (
