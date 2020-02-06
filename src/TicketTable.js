@@ -6,6 +6,8 @@ import ArrowDownward from '@material-ui/icons/ArrowDownwardRounded';
 import Clear from '@material-ui/icons/ClearRounded';
 import Search from '@material-ui/icons/SearchRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
+import Edit from '@material-ui/icons/Edit';
+import DoneRounded from '@material-ui/icons/DoneRounded';
 
 export default class TicketTable extends React.Component {
   _data = [
@@ -79,7 +81,22 @@ export default class TicketTable extends React.Component {
           toolbar: false,
           paging: false,
         }}
-        localization={{ body: { emptyDataSourceMessage: "還沒有資料耶" } }}
+        localization={{
+          header: { actions: "修改" },
+          body: { emptyDataSourceMessage: "還沒有資料耶" },
+        }}
+        actions={[
+          {
+            icon: () => <DoneRounded/>,
+            tooltip: '已售出',
+            onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+          },
+          {
+            icon: () => <Edit/>,
+            tooltip: '編輯',
+            onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+          },
+        ]}
       />
     );
   }
