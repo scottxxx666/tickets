@@ -8,6 +8,12 @@ import Search from '@material-ui/icons/SearchRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
 import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
 
 export default class TicketTable extends React.Component {
   _data = [
@@ -79,13 +85,16 @@ export default class TicketTable extends React.Component {
       field: "contact",
     },
   ];
+  state = {
+    open: false,
+  };
 
-  getActions() {
+  getActions = () => {
     return [
       rowData => ({
         icon: () => <DoneRounded/>,
         tooltip: '已售出',
-        onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+        onClick: () => this.setState({ open: true }),
         hidden: rowData.number === 1,
       }),
       rowData => ({
@@ -95,26 +104,50 @@ export default class TicketTable extends React.Component {
         hidden: rowData.number === 1,
       }),
     ];
-  }
+  };
 
   render() {
+    const handleClose = () => {
+      this.setState({ open: false });
+    };
     return (
-      <MaterialTable
-        icons={this._tableIcons}
-        columns={this._titles}
-        data={this._data}
-        title={this._title}
-        options={{
-          filtering: true,
-          toolbar: false,
-          paging: false,
-        }}
-        localization={{
-          header: { actions: "修改" },
-          body: { emptyDataSourceMessage: "還沒有資料耶" },
-        }}
-        actions={this.getActions()}
-      />
+      <div>
+        <MaterialTable
+          icons={this._tableIcons}
+          columns={this._titles}
+          data={this._data}
+          title={this._title}
+          options={{
+            filtering: true,
+            toolbar: false,
+            paging: false,
+          }}
+          localization={{
+            header: { actions: "修改" },
+            body: { emptyDataSourceMessage: "還沒有資料耶" },
+          }}
+          actions={this.getActions()}
+        />
+        <Dialog
+          open={this.state.open}
+          onClose={handleClose}
+        >
+          <DialogTitle id="alert-dialog-title">{"確認"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              確定要將售票狀態改為“已結束”嗎？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              取消
+            </Button>
+            <Button onClick={handleClose} color="primary" autoFocus>
+              確定
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     );
   }
 }
