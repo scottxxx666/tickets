@@ -31,6 +31,16 @@ export default class TicketTable extends React.Component {
       transaction: "演唱會面交",
       note: "",
     },
+    {
+      updatedAt: "2019/12/12 12:12:13",
+      status: "WAITING",
+      contact: "LINE: XDD",
+      seats: "紫A24號",
+      number: 1,
+      price: 4200,
+      transaction: "演唱會面交",
+      note: "不拆售",
+    },
   ];
   _tableIcons = {
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref}/>),
@@ -69,6 +79,23 @@ export default class TicketTable extends React.Component {
     },
   ];
 
+  getActions() {
+    return [
+      rowData => ({
+        icon: () => <DoneRounded/>,
+        tooltip: '已售出',
+        onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+        hidden: rowData.number === 1,
+      }),
+      rowData => ({
+        icon: () => <Edit/>,
+        tooltip: '編輯',
+        onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+        hidden: rowData.number === 1,
+      }),
+    ];
+  }
+
   render() {
     return (
       <MaterialTable
@@ -85,18 +112,7 @@ export default class TicketTable extends React.Component {
           header: { actions: "修改" },
           body: { emptyDataSourceMessage: "還沒有資料耶" },
         }}
-        actions={[
-          {
-            icon: () => <DoneRounded/>,
-            tooltip: '已售出',
-            onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
-          },
-          {
-            icon: () => <Edit/>,
-            tooltip: '編輯',
-            onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
-          },
-        ]}
+        actions={this.getActions()}
       />
     );
   }
