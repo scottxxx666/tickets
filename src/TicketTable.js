@@ -16,45 +16,12 @@ import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 
 export default class TicketTable extends React.Component {
-  _data = [
-    {
-      updatedAt: "2019/12/12 12:12:12",
-      status: "WAITING",
-      contact: "FB: XDD",
-      seats: "紫A 24號",
-      number: 3,
-      price: 4200,
-      transaction: "演唱會面交",
-      note: "不拆售",
-    },
-    {
-      updatedAt: "2020/02/13 12:12:12",
-      status: "END",
-      contact: "FB: XDD2",
-      seats: "紫A 25號",
-      number: 1,
-      price: 5200,
-      transaction: "演唱會面交",
-      note: "",
-    },
-    {
-      updatedAt: "2019/12/12 12:12:13",
-      status: "WAITING",
-      contact: "LINE: XDD",
-      seats: "紫A24號",
-      number: 1,
-      price: 4200,
-      transaction: "演唱會面交",
-      note: "不拆售",
-    },
-  ];
   _tableIcons = {
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref}/>),
     ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
     Search: forwardRef((props, ref) => <Search {...props} ref={ref}/>),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref}/>),
   };
-  _title = "待讓票卷";
   _titles = [
     {
       title: "更新時間",
@@ -87,6 +54,38 @@ export default class TicketTable extends React.Component {
   ];
   state = {
     open: false,
+    tickets: [
+      {
+        updatedAt: "2019/12/12 12:12:12",
+        status: "WAITING",
+        contact: "FB: XDD",
+        seats: "紫A 24號",
+        number: 3,
+        price: 4200,
+        transaction: "演唱會面交",
+        note: "不拆售",
+      },
+      {
+        updatedAt: "2020/02/13 12:12:12",
+        status: "END",
+        contact: "FB: XDD2",
+        seats: "紫A 25號",
+        number: 1,
+        price: 5200,
+        transaction: "演唱會面交",
+        note: "",
+      },
+      {
+        updatedAt: "2019/12/12 12:12:13",
+        status: "WAITING",
+        contact: "LINE: XDD",
+        seats: "紫A24號",
+        number: 1,
+        price: 4200,
+        transaction: "演唱會面交",
+        note: "不拆售",
+      },
+    ],
   };
 
   getActions = () => {
@@ -115,8 +114,7 @@ export default class TicketTable extends React.Component {
         <MaterialTable
           icons={this._tableIcons}
           columns={this._titles}
-          data={this._data}
-          title={this._title}
+          data={this.state.tickets}
           options={{
             filtering: true,
             toolbar: false,
