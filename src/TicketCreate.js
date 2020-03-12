@@ -33,7 +33,7 @@ export default function () {
               <TextField id="area" label="票卷區域" placeholder="紅2A區" margin="normal" required/>
             </Grid>
             <Grid item xs={12} className={classes.row}>
-              <TextField id="serial" label="座位序號" placeholder="10排12號" margin="normal" required/>
+              <TextField id="seat" label="座位序號" placeholder="10排12號" margin="normal" required/>
             </Grid>
             <Grid item xs={12} className={classes.row}>
               <TextField id="number"
@@ -54,7 +54,7 @@ export default function () {
                          required/>
             </Grid>
             <Grid item xs={12} className={classes.row}>
-              <TextField id="transaction" label="交易方式" margin="normal" multiline required/>
+              <TextField id="payment" label="交易方式" margin="normal" multiline required/>
             </Grid>
             <Grid item xs={12} className={classes.row}>
               <TextField id="note" label="備註" multiline margin="normal"/>
