@@ -7,6 +7,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 import {Link} from 'react-router-dom';
 import {useRouteMatch} from 'react-router-dom';
+import {gql} from 'apollo-boost';
+import {useQuery} from '@apollo/react-hooks';
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -17,9 +19,45 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const FEED_QUERY = gql`
+    {
+        tickets1(artist:"artist"){
+            id
+            area
+            artist
+            seat
+            number
+            price
+            payment
+            note
+            contactWay{
+                id
+                platform
+            }
+            postedBy{
+                id
+            }
+            event
+            {
+                id
+            }
+        }
+    }
+`;
+
 export default function () {
   const classes = useStyles();
   let match = useRouteMatch();
+  const { loading, error, data } = useQuery(FEED_QUERY);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
   return (
     <Container>
       <Grid

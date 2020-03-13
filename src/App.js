@@ -1,10 +1,36 @@
 import React from 'react';
+import TicketList from './TicketList';
+import {HashRouter, Route, Switch} from 'react-router-dom';
+import TicketCreate from './TicketCreate';
+import ApolloClient from 'apollo-boost';
+import {ApolloProvider} from '@apollo/react-hooks';
 
-function App() {
+export default () => {
+  const client = new ApolloClient({
+    uri: 'http://localhost:4000/',
+  });
+
   return (
-    <div className="App">
-    </div>
+    <ApolloProvider client={client}>
+      <HashRouter>
+        <div className="App">
+          <Switch>
+            <Route path="/about">
+              Hi
+            </Route>
+            <Route path="/tickets/create">
+              <TicketCreate/>
+            </Route>
+            <Route path="/tickets">
+              <TicketList/>
+            </Route>
+            <Route path="/">
+              index
+            </Route>
+          </Switch>
+        </div>
+      </HashRouter>
+    </ApolloProvider>
   );
-}
+};
 
-export default App;
