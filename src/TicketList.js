@@ -50,14 +50,7 @@ export default function () {
   let match = useRouteMatch();
   const { loading, error, data } = useQuery(FEED_QUERY);
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-
+  const { tickets } = data || [];
   return (
     <Container>
       <Grid
@@ -73,7 +66,7 @@ export default function () {
         </Link>
       </Grid>
       </Grid>
-      <TicketTable/>
+      <TicketTable tickets={tickets}/>
     </Container>
   );
 }

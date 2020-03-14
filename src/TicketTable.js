@@ -33,8 +33,11 @@ export default class TicketTable extends React.Component {
       lookup: { WAITING: "讓票中", END: "已結束" },
       defaultFilter: ["WAITING"],
     }, {
+      title: "區域",
+      field: "area",
+    }, {
       title: "位子",
-      field: "seats",
+      field: "seat",
     }, {
       title: "張數",
       field: "number",
@@ -43,49 +46,17 @@ export default class TicketTable extends React.Component {
       field: "price",
     }, {
       title: "交易方式",
-      field: "transaction",
+      field: "payment",
     }, {
       title: "備註",
       field: "note",
     }, {
       title: "聯絡方式 (Ptt / Line / FB)",
-      field: "contact",
+      field: "contactWay",
     },
   ];
   state = {
     open: false,
-    tickets: [
-      {
-        updatedAt: "2019/12/12 12:12:12",
-        status: "WAITING",
-        contact: "FB: XDD",
-        seats: "紫A 24號",
-        number: 3,
-        price: 4200,
-        transaction: "演唱會面交",
-        note: "不拆售",
-      },
-      {
-        updatedAt: "2020/02/13 12:12:12",
-        status: "END",
-        contact: "FB: XDD2",
-        seats: "紫A 25號",
-        number: 1,
-        price: 5200,
-        transaction: "演唱會面交",
-        note: "",
-      },
-      {
-        updatedAt: "2019/12/12 12:12:13",
-        status: "WAITING",
-        contact: "LINE: XDD",
-        seats: "紫A24號",
-        number: 1,
-        price: 4200,
-        transaction: "演唱會面交",
-        note: "不拆售",
-      },
-    ],
   };
 
   getActions = () => {
@@ -114,7 +85,7 @@ export default class TicketTable extends React.Component {
         <MaterialTable
           icons={this._tableIcons}
           columns={this._titles}
-          data={this.state.tickets}
+          data={this.props.tickets}
           options={{
             filtering: true,
             toolbar: false,
