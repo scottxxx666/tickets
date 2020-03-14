@@ -52,7 +52,7 @@ export default class TicketTable extends React.Component {
       field: "note",
     }, {
       title: "聯絡方式 (Ptt / Line / FB)",
-      field: "contactWay",
+      field: "contactInformation",
     },
   ];
   state = {

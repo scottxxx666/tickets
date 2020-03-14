@@ -30,7 +30,7 @@ const FEED_QUERY = gql`
             price
             payment
             note
-            contactWay{
+            contactInformation {
                 id
                 platform
             }
