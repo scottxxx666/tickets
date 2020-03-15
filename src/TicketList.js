@@ -23,6 +23,7 @@ const FEED_QUERY = gql`
     {
         tickets1(artist:"artist"){
             id
+            status
             area
             artist
             seat
@@ -31,16 +32,16 @@ const FEED_QUERY = gql`
             payment
             note
             contactInformation {
-                id
                 platform
+                platformId
             }
-            postedBy{
+            postedBy {
                 id
             }
-            event
-            {
+            event {
                 id
             }
+            updatedAt
         }
     }
 `;

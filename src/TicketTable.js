@@ -27,6 +27,7 @@ export default class TicketTable extends React.Component {
       title: "更新時間",
       field: "updatedAt",
       defaultSort: "desc",
+      render: (data) => (new Date(parseInt(data.updatedAt))).toLocaleString(),
     }, {
       title: "狀態",
       field: "status",
