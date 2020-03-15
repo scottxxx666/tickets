@@ -52,8 +52,11 @@ export default class TicketTable extends React.Component {
       title: "備註",
       field: "note",
     }, {
-      title: "聯絡方式 (Ptt / Line / FB)",
+      title: "聯絡方式",
       field: "contactInformation",
+      render: (data) => (
+        <div>{data.contactInformation.map(e => `${e.platform} 帳號：${e.platformId}`)}</div>
+      ),
     },
   ];
   state = {
