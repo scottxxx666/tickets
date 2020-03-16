@@ -27,7 +27,15 @@ export default function () {
       [name]: value,
     }));
   }
-  const [ticket, setTicket] = useState();
+
+  function handleContactChange(event) {
+    const platform = event.target.dataset.platform;
+    const platformId = event.target.value;
+    setContact(prev => [...prev.filter(e => e.platform !== platform), { platform, platformId }]);
+  }
+
+  const [ticket, setTicket] = useState({});
+  const [contact, setContact] = useState([]);
   const classes = useStyles();
   return (
     <Grid container justify="center">
@@ -109,16 +117,38 @@ export default function () {
               />
             </Grid>
             <Grid item xs={12} className={classes.row}>
-              <TextField id="ptt_id" label="PTT ID" margin="normal"/>
+              <TextField
+                id="ptt_id"
+                name="ptt_id"
+                label="PTT ID"
+                margin="normal"
+                inputProps={{ "data-platform": "PTT" }}
+                onChange={handleContactChange}
+              />
             </Grid>
             <Grid item xs={12} className={classes.row}>
-              <TextField id="line_id" label="LINE ID" margin="normal"/>
+              <TextField
+                id="line_id"
+                name="line_id"
+                data-platform="LINE"
+                label="LINE ID"
+                margin="normal"
+                inputProps={{ "data-platform": "LINE" }}
+                onChange={handleContactChange}
+              />
             </Grid>
             <Grid item xs={12} className={classes.row}>
-              <TextField id="fb_id"
-                         label="FB 用戶名稱"
-                         margin="normal"
-                         helperText="非中文！可以看個人頁面的網址 facebook.com/ 之後的部分，或是參考 https://www.facebook.com/help/messenger-app/android/1047811435279151"/>
+              <TextField
+                error={false}
+                id="fb_id"
+                name="fb_id"
+                label="FB 用戶名稱"
+                data-platform="FB"
+                margin="normal"
+                helperText="非中文！可以看個人頁面的網址 facebook.com/ 之後的部分，或是參考 https://www.facebook.com/help/messenger-app/android/1047811435279151"
+                inputProps={{ "data-platform": "FB" }}
+                onChange={handleContactChange}
+              />
             </Grid>
           </CardContent>
           <CardActions>
