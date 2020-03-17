@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import {gql} from 'apollo-boost';
 import {useMutation} from '@apollo/react-hooks';
 import {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,20 +22,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CREATE_TICKET = gql`
-    mutation (
-        #        $artist: String!
+    mutation CreateTicket(
         $area: String!
         $seat: String!
         $number: Int!
         $price: Int!
         $payment: String!
         $note: String
-        $contactInformation: [ContactInformationInput]
-        #        $event: EventInput!
+        $contactInformation: [ContactInformationInput!]
+        $eventId: ID!
     ) {
         createTicket(input: {
             status: WAITING
-            artist: "artist"
             area: $area
             seat: $seat
             number: $number
@@ -44,7 +42,7 @@ const CREATE_TICKET = gql`
             note: $note
             contactInformation: $contactInformation
             event: {
-                id: "5e6a0bd29b067470b1eef26d"
+                id: $eventId
             }
         }) {
             id
@@ -53,24 +51,26 @@ const CREATE_TICKET = gql`
 `;
 
 export default function () {
+  const classes = useStyles();
+  const { eventId } = useParams();
   const history = useHistory();
   const [ticket, setTicket] = useState({ number: 1 });
   const [contactInformation, setContactInformation] = useState([]);
   const [createTicket, _] = useMutation(CREATE_TICKET, {
     variables: {
+      eventId: eventId,
       ...ticket,
       number: parseInt(ticket.number, 10),
       price: parseInt(ticket.price, 10),
-      contactInformation
+      contactInformation,
     },
     onCompleted: (data) => {
-      history.push('/tickets');
+      history.push(`/event/${eventId}/tickets`);
     },
     onError: (e) => {
       console.error(e);
     },
   });
-  const classes = useStyles();
 
   function handleChange(event) {
     const name = event.target.name;

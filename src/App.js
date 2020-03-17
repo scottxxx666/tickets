@@ -18,10 +18,10 @@ export default () => {
             <Route path="/about">
               Hi
             </Route>
-            <Route path="/tickets/create">
+            <Route path="/event/:eventId/tickets/create">
               <TicketCreate/>
             </Route>
-            <Route path="/tickets">
+            <Route path="/event/:eventId/tickets">
               <TicketList/>
             </Route>
             <Route path="/">
