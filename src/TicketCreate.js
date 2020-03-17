@@ -30,7 +30,7 @@ const CREATE_TICKET = gql`
         $price: Int!
         $payment: String!
         $note: String
-        #        $contactInformation: [ContactInformationInput]
+        $contactInformation: [ContactInformationInput]
         #        $event: EventInput!
     ) {
         createTicket(input: {
@@ -42,9 +42,7 @@ const CREATE_TICKET = gql`
             price: $price
             payment: $payment
             note: $note
-            contactInformation: [
-                { platformId:"platform id",platform:"ptt" }
-            ]
+            contactInformation: $contactInformation
             event: {
                 id: "5e6a0bd29b067470b1eef26d"
             }
