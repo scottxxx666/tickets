@@ -7,7 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import {gql} from 'apollo-boost';
+import {useMutation} from '@apollo/react-hooks';
 import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +20,39 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(5),
   },
 }));
+
+const CREATE_TICKET = gql`
+    mutation (
+        #        $artist: String!
+        $area: String!
+        $seat: String!
+        $number: Int!
+        $price: Int!
+        $payment: String!
+        $note: String
+        #        $contactInformation: [ContactInformationInput]
+        #        $event: EventInput!
+    ) {
+        createTicket(input: {
+            status: WAITING
+            artist: "artist"
+            area: $area
+            seat: $seat
+            number: $number
+            price: $price
+            payment: $payment
+            note: $note
+            contactInformation: [
+                { platformId:"platform id",platform:"ptt" }
+            ]
+            event: {
+                id: "5e6a0bd29b067470b1eef26d"
+            }
+        }) {
+            id
+        }
+    }
+`;
 
 export default function () {
   function handleChange(event) {
@@ -34,8 +70,27 @@ export default function () {
     setContact(prev => [...prev.filter(e => e.platform !== platform), { platform, platformId }]);
   }
 
-  const [ticket, setTicket] = useState({});
+  async function submit() {
+    return createTicket();
+  }
+
+  const history = useHistory();
+  const [ticket, setTicket] = useState({ number: 1 });
   const [contact, setContact] = useState([]);
+  const [createTicket, _] = useMutation(CREATE_TICKET, {
+    variables: {
+      ...ticket,
+      number: parseInt(ticket.number, 10),
+      price: parseInt(ticket.price, 10),
+    },
+    onCompleted: (data) => {
+      history.push('/tickets');
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+  });
+
   const classes = useStyles();
   return (
     <Grid container justify="center">
@@ -152,7 +207,7 @@ export default function () {
             </Grid>
           </CardContent>
           <CardActions>
-            <Button variant="contained" color="primary">提交</Button>
+            <Button variant="contained" color="primary" onClick={submit}>提交</Button>
           </CardActions>
         </form>
       </Card>
