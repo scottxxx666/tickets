@@ -67,7 +67,7 @@ export default function () {
   function handleContactChange(event) {
     const platform = event.target.dataset.platform;
     const platformId = event.target.value;
-    setContact(prev => [...prev.filter(e => e.platform !== platform), { platform, platformId }]);
+    setContactInformation(prev => [...prev.filter(e => e.platform !== platform), { platform, platformId }]);
   }
 
   async function submit() {
@@ -76,12 +76,13 @@ export default function () {
 
   const history = useHistory();
   const [ticket, setTicket] = useState({ number: 1 });
-  const [contact, setContact] = useState([]);
+  const [contactInformation, setContactInformation] = useState([]);
   const [createTicket, _] = useMutation(CREATE_TICKET, {
     variables: {
       ...ticket,
       number: parseInt(ticket.number, 10),
       price: parseInt(ticket.price, 10),
+      contactInformation
     },
     onCompleted: (data) => {
       history.push('/tickets');
