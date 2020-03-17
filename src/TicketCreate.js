@@ -53,6 +53,25 @@ const CREATE_TICKET = gql`
 `;
 
 export default function () {
+  const history = useHistory();
+  const [ticket, setTicket] = useState({ number: 1 });
+  const [contactInformation, setContactInformation] = useState([]);
+  const [createTicket, _] = useMutation(CREATE_TICKET, {
+    variables: {
+      ...ticket,
+      number: parseInt(ticket.number, 10),
+      price: parseInt(ticket.price, 10),
+      contactInformation
+    },
+    onCompleted: (data) => {
+      history.push('/tickets');
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+  });
+  const classes = useStyles();
+
   function handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -72,25 +91,6 @@ export default function () {
     return createTicket();
   }
 
-  const history = useHistory();
-  const [ticket, setTicket] = useState({ number: 1 });
-  const [contactInformation, setContactInformation] = useState([]);
-  const [createTicket, _] = useMutation(CREATE_TICKET, {
-    variables: {
-      ...ticket,
-      number: parseInt(ticket.number, 10),
-      price: parseInt(ticket.price, 10),
-      contactInformation
-    },
-    onCompleted: (data) => {
-      history.push('/tickets');
-    },
-    onError: (e) => {
-      console.error(e);
-    },
-  });
-
-  const classes = useStyles();
   return (
     <Grid container justify="center">
       <Card className={classes.root}>
