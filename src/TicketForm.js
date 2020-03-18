@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 export default function (props) {
   return (
     <Grid container justify="center">
-      <Card className={props.classes.root}>
+      <Card>
         <form className={props.classes.form} noValidate>
           <CardContent>
             <Grid container justify="center">
@@ -18,7 +18,7 @@ export default function (props) {
                 新增一筆售票資料
               </Typography>
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="area"
                 name="area"
@@ -29,7 +29,7 @@ export default function (props) {
                 required
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="seat"
                 name="seat"
@@ -40,7 +40,7 @@ export default function (props) {
                 required
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="number"
                 name="number"
@@ -53,7 +53,7 @@ export default function (props) {
                 required
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="price"
                 name="price"
@@ -66,7 +66,7 @@ export default function (props) {
                 required
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="payment"
                 name="payment"
@@ -77,7 +77,7 @@ export default function (props) {
                 required
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="note"
                 name="note"
@@ -87,7 +87,7 @@ export default function (props) {
                 onChange={props.handleChange}
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="ptt_id"
                 name="ptt_id"
@@ -97,7 +97,7 @@ export default function (props) {
                 onChange={props.handleContactChange}
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 id="line_id"
                 name="line_id"
@@ -108,7 +108,7 @@ export default function (props) {
                 onChange={props.handleContactChange}
               />
             </Grid>
-            <Grid item xs={12} className={props.classes.row}>
+            <Grid item xs={12}>
               <TextField
                 error={false}
                 id="fb_id"

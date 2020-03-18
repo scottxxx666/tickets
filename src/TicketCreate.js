@@ -7,10 +7,8 @@ import {useHistory, useParams} from 'react-router-dom';
 import TicketForm from './TicketForm';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    minWidth: 700,
-  },
   form: {
+    minWidth: 700,
     padding: theme.spacing(5),
   },
 }));
