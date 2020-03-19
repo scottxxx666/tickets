@@ -4,6 +4,7 @@ import {HashRouter, Route, Switch} from 'react-router-dom';
 import TicketCreate from './TicketCreate';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
+import Login from './Login';
 
 export default () => {
   const client = new ApolloClient({
@@ -17,6 +18,9 @@ export default () => {
           <Switch>
             <Route path="/about">
               Hi
+            </Route>
+            <Route path="/login">
+              <Login/>
             </Route>
             <Route path="/event/:eventId/tickets/create">
               <TicketCreate/>
