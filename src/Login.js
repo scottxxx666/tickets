@@ -21,12 +21,13 @@ export default () => {
   };
 
   const classes = useStyles();
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   return (
     <Grid container direction="column" alignItems="center">
       <Typography className={classes.title} variant="h4">
         Login
       </Typography>
-      <GoogleLogin onSuccess={successHandler} onFailure={failureHandler} clientId={process.env.GOOGLE_CLIENT_ID}/>
+      <GoogleLogin onSuccess={successHandler} onFailure={failureHandler} clientId={clientId}/>
     </Grid>
   );
 }
