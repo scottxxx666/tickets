@@ -4,6 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import AuthContext from './AuthContext';
+import {useHistory} from 'react-router-dom';
+import {useMutation} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -11,14 +14,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const LOGIN_MUTATION = gql`
+    mutation($token:String!){
+        login(platform:"GOOGLE", token:$token){
+            token
+            user{
+                id
+                email
+            }
+        }
+    }
+`;
+
 export default () => {
+  const [login] = useMutation(LOGIN_MUTATION, {
+    onCompleted: (data) => {
+      auth.update(data.login);
+    },
+  });
+
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const successHandler = (data) => {
-    auth.update(data.tokenId);
+    login({ variables: { token: data.tokenId } });
   };
   const failureHandler = (e) => {
     console.error(e);
-    alert('failed');
   };
 
   const classes = useStyles();
