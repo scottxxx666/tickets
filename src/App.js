@@ -5,8 +5,10 @@ import TicketCreate from './TicketCreate';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
 import Login from './Login';
+import dotenv from 'dotenv';
 
 export default () => {
+  dotenv.config();
   const client = new ApolloClient({
     uri: 'http://localhost:4000/',
   });
