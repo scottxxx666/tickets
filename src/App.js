@@ -6,6 +6,7 @@ import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
 import Login from './Login';
 import dotenv from 'dotenv';
+import AuthContextProvider from './AuthContextProvider';
 
 export default () => {
   dotenv.config();
@@ -15,27 +16,29 @@ export default () => {
 
   return (
     <ApolloProvider client={client}>
-      <HashRouter>
-        <div className="App">
-          <Switch>
-            <Route path="/about">
-              Hi
-            </Route>
-            <Route path="/login">
-              <Login/>
-            </Route>
-            <Route path="/event/:eventId/tickets/create">
-              <TicketCreate/>
-            </Route>
-            <Route path="/event/:eventId/tickets">
-              <TicketList/>
-            </Route>
-            <Route path="/">
-              index
-            </Route>
-          </Switch>
-        </div>
-      </HashRouter>
+      <AuthContextProvider>
+        <HashRouter>
+          <div className="App">
+            <Switch>
+              <Route path="/about">
+                Hi
+              </Route>
+              <Route path="/login">
+                <Login/>
+              </Route>
+              <Route path="/event/:eventId/tickets/create">
+                <TicketCreate/>
+              </Route>
+              <Route path="/event/:eventId/tickets">
+                <TicketList/>
+              </Route>
+              <Route path="/">
+                index
+              </Route>
+            </Switch>
+          </div>
+        </HashRouter>
+      </AuthContextProvider>
     </ApolloProvider>
   );
 };
