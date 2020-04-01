@@ -15,6 +15,6 @@ export default (props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, update }} {...props}/>
+    <AuthContext.Provider value={{ data: auth, update }} {...props}/>
   );
 };

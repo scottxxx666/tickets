@@ -1,12 +1,27 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import TicketList from './TicketList';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import TicketCreate from './TicketCreate';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from '@apollo/react-hooks';
 import Login from './Login';
 import dotenv from 'dotenv';
 import AuthContextProvider from './AuthContextProvider';
+import AuthContext from './AuthContext';
+
+const PrivateRoute = (props) => {
+  const auth = useContext(AuthContext);
+
+  const { children, ...rest } = props;
+  const isAuth = auth.data;
+  return (
+    <Route {...rest}
+           render={(props) =>
+             isAuth ? (children) : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
+           }
+    />
+  );
+};
 
 export default () => {
   dotenv.config();
@@ -26,9 +41,9 @@ export default () => {
               <Route path="/login">
                 <Login/>
               </Route>
-              <Route path="/event/:eventId/tickets/create">
+              <PrivateRoute path="/event/:eventId/tickets/create">
                 <TicketCreate/>
-              </Route>
+              </PrivateRoute>
               <Route path="/event/:eventId/tickets">
                 <TicketList/>
               </Route>
