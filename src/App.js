@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import AuthContextProvider from './AuthContextProvider';
 import AuthContext from './AuthContext';
 import AppTopBar from './AppTopBar';
+import ScrollTop from './ScrollTop';
 
 const PrivateRoute = (props) => {
   const auth = useContext(AuthContext);
@@ -54,6 +55,7 @@ export default () => {
               </Route>
             </Switch>
           </div>
+          <ScrollTop/>
         </HashRouter>
       </AuthContextProvider>
     </ApolloProvider>

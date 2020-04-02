@@ -1,7 +1,7 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded';
 import IconButton from '@material-ui/core/IconButton';
 import React, {Fragment, useState} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -78,7 +78,7 @@ const AppTopBar = () => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar/>
+      <Toolbar id="back-to-top-anchor"/>
     </Fragment>
   );
 };
