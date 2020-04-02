@@ -8,6 +8,7 @@ import Login from './Login';
 import dotenv from 'dotenv';
 import AuthContextProvider from './AuthContextProvider';
 import AuthContext from './AuthContext';
+import AppTopBar from './AppTopBar';
 
 const PrivateRoute = (props) => {
   const auth = useContext(AuthContext);
@@ -34,6 +35,7 @@ export default () => {
       <AuthContextProvider>
         <HashRouter>
           <div className="App">
+            <AppTopBar/>
             <Switch>
               <Route path="/about">
                 Hi
