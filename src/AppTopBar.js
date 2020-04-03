@@ -1,8 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded';
-import IconButton from '@material-ui/core/IconButton';
-import React, {Fragment, useContext, useState} from 'react';
+import React, {Fragment, useContext} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
