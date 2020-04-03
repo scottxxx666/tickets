@@ -14,7 +14,12 @@ export default (props) => {
     setAuth(data);
   };
 
+  const logout = () => {
+    Cookies.remove('auth');
+    setAuth(undefined);
+  };
+
   return (
-    <AuthContext.Provider value={{ data: auth, update }} {...props}/>
+    <AuthContext.Provider value={{ data: auth, update, logout }} {...props}/>
   );
 };

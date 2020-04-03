@@ -3,7 +3,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded';
 import IconButton from '@material-ui/core/IconButton';
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import AuthContext from './AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -42,6 +43,10 @@ const AppTopBar = () => {
     setOpen(false);
   };
 
+  const auth = useContext(AuthContext);
+  const logout = () => {
+    auth.logout();
+  };
   return (
     <Fragment>
       <HideOnScroll>
@@ -65,7 +70,7 @@ const AppTopBar = () => {
                   <Paper>
                     <ClickAwayListener onClickAway={handleClose}>
                       <MenuList>
-                        <MenuItem>Logout</MenuItem>
+                        <MenuItem onClick={logout}>Logout</MenuItem>
                       </MenuList>
                     </ClickAwayListener>
                   </Paper>
