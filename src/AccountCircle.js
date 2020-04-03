@@ -1,14 +1,14 @@
 import AccountCircleIcon from '@material-ui/icons/AccountCircleRounded';
 import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
-import {Link} from 'react-router-dom';
+import LoginLink from './LoginLink';
 
 export default () => {
   return (
-    <Link to={location => ({ pathname: '/login', state: { from: location } })}>
+    <LoginLink>
       <IconButton>
         <AccountCircleIcon fontSize="large"/>
       </IconButton>
-    </Link>
+    </LoginLink>
   );
 };
