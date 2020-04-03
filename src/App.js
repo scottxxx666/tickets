@@ -15,11 +15,10 @@ const PrivateRoute = (props) => {
   const auth = useContext(AuthContext);
 
   const { children, ...rest } = props;
-  const isAuth = auth.data;
   return (
     <Route {...rest}
            render={(props) =>
-             isAuth ? (children) : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
+             auth.isLogin() ? (children) : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
            }
     />
   );
