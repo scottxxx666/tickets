@@ -8,6 +8,7 @@ import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import AuthContext from './AuthContext';
 import AccountMenu from './AccountMenu';
+import AccountCircle from './AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -35,14 +36,7 @@ const AppTopBar = () => {
         <AppBar position="fixed">
           <Toolbar>
             <div className={classes.grow}/>
-            {
-              auth.isLogin() ? (
-                <AccountMenu/>
-              ) : (
-                <IconButton>
-                  <AccountCircleIcon fontSize="large"/>
-                </IconButton>)
-            }
+            {auth.isLogin() ? <AccountMenu/> : <AccountCircle/>}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
