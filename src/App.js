@@ -7,22 +7,9 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import Login from './Login';
 import dotenv from 'dotenv';
 import AuthContextProvider from './AuthContextProvider';
-import AuthContext from './AuthContext';
 import AppTopBar from './AppTopBar';
 import ScrollTop from './ScrollTop';
-
-const PrivateRoute = (props) => {
-  const auth = useContext(AuthContext);
-
-  const { children, ...rest } = props;
-  return (
-    <Route {...rest}
-           render={(props) =>
-             auth.isLogin() ? (children) : <Redirect to={{ pathname: '/login', state: { from: props.location } }}/>
-           }
-    />
-  );
-};
+import PrivateRoute from './PrivateRoute';
 
 export default () => {
   dotenv.config();
