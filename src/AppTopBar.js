@@ -35,10 +35,14 @@ const AppTopBar = () => {
         <AppBar position="fixed">
           <Toolbar>
             <div className={classes.grow}/>
-            <IconButton>
-              <AccountCircleIcon fontSize="large"/>
-            </IconButton>
+            {
+              auth.isLogin() ? (
                 <AccountMenu/>
+              ) : (
+                <IconButton>
+                  <AccountCircleIcon fontSize="large"/>
+                </IconButton>)
+            }
           </Toolbar>
         </AppBar>
       </HideOnScroll>

@@ -19,7 +19,11 @@ export default (props) => {
     setAuth(undefined);
   };
 
+  const isLogin = () => {
+    return auth;
+  };
+
   return (
-    <AuthContext.Provider value={{ data: auth, update, logout }} {...props}/>
+    <AuthContext.Provider value={{ data: auth, update, logout, isLogin }} {...props}/>
   );
 };
