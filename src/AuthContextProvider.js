@@ -24,8 +24,9 @@ export default (props) => {
   };
 
   const getUser = () => auth ? auth.user.name : null;
+  const getToken = () => auth ? auth.token : null;
 
   return (
-    <AuthContext.Provider value={{ data: auth, update, logout, isLogin, getUser }} {...props}/>
+    <AuthContext.Provider value={{ data: auth, update, logout, isLogin, getUser, getToken }} {...props}/>
   );
 };
