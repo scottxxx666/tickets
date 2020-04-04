@@ -21,6 +21,7 @@ const LOGIN_MUTATION = gql`
             user{
                 id
                 email
+                name
             }
         }
     }
