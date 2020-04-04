@@ -43,7 +43,7 @@ const AccountMenu = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList>
-                  <MenuItem onClick={logout}>Logout</MenuItem>
+                  <MenuItem onClick={logout}>登出</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
