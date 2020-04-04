@@ -14,6 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
+import MultiLine from './MultiLine';
 
 export default class TicketTable extends React.Component {
   _tableIcons = {
@@ -48,14 +49,16 @@ export default class TicketTable extends React.Component {
     }, {
       title: "交易方式",
       field: "payment",
+      render: ({ payment }) => (<MultiLine data={payment}/>),
     }, {
       title: "備註",
       field: "note",
+      render: ({ note }) => (<MultiLine data={note}/>),
     }, {
       title: "聯絡方式",
       field: "contactInformation",
-      render: (data) => (
-        <div>{data.contactInformation.map(e => `${e.platform} 帳號：${e.platformId}`)}</div>
+      render: ({ contactInformation }) => (
+        contactInformation.map(e => <div key={e.platform}>{e.platform} 帳號：{e.platformId}</div>)
       ),
     },
   ];
