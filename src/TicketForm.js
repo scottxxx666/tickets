@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import TextInputRow from './TextInputRow';
+import TextInputRow from './common/TextInputRow';
 
 export default function ({ classes, handleChange, handleContactChange, submit }) {
   return (

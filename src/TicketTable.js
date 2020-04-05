@@ -8,9 +8,9 @@ import Search from '@material-ui/icons/SearchRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
 import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
-import MultiLine from './MultiLine';
+import MultiLine from './common/MultiLine';
 import AuthContext from './AuthContext';
-import ConfirmDialog from './ConfirmAlert';
+import ConfirmDialog from './common/ConfirmAlert';
 
 export default class TicketTable extends React.Component {
   static contextType = AuthContext;
