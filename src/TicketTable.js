@@ -8,14 +8,9 @@ import Search from '@material-ui/icons/SearchRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
 import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
 import MultiLine from './MultiLine';
 import AuthContext from './AuthContext';
+import ConfirmDialog from './ConfirmAlert';
 
 export default class TicketTable extends React.Component {
   static contextType = AuthContext;
@@ -94,7 +89,7 @@ export default class TicketTable extends React.Component {
       this.setState({ open: false });
     };
     return (
-      <div>
+      <React.Fragment>
         <MaterialTable
           icons={this._tableIcons}
           columns={this._titles}
@@ -110,26 +105,8 @@ export default class TicketTable extends React.Component {
           }}
           actions={this.getActions(this.context)}
         />
-        <Dialog
-          open={this.state.open}
-          onClose={handleClose}
-        >
-          <DialogTitle id="alert-dialog-title">{"確認"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              確定要將售票狀態改為“已結束”嗎？
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              取消
-            </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              確定
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+        <ConfirmDialog open={this.state.open} handleClose={handleClose} desc={"確定要將售票狀態改為“已結束”嗎？"}/>
+      </React.Fragment>
     );
   }
 }
