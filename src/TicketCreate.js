@@ -48,7 +48,7 @@ export default function () {
   const history = useHistory();
   const [ticket, setTicket] = useState({ number: 1 });
   const [contactInformation, setContactInformation] = useState([]);
-  const [createTicket, _] = useMutation(CREATE_TICKET, {
+  const [createTicket, { error }] = useMutation(CREATE_TICKET, {
     variables: {
       eventId: eventId,
       ...ticket,
@@ -89,5 +89,5 @@ export default function () {
     handleContactChange,
     submit,
   };
-  return <TicketForm {...props} />;
+  return <TicketForm {...props} error={error}/>;
 }

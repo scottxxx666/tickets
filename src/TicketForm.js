@@ -7,7 +7,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import TextInputRow from './common/TextInputRow';
 
-export default function ({ classes, handleChange, handleContactChange, submit }) {
+export default function ({ classes, handleChange, handleContactChange, submit, error }) {
+  if (error) {
+    alert('抱歉，網路錯誤，麻煩稍後再試。');
+  }
   return (
     <Grid container justify="center">
       <Card>
