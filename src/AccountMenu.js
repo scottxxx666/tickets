@@ -33,7 +33,7 @@ const AccountMenu = () => {
         endIcon={<AccountCircleIcon/>}
         onClick={toggleMenu}
         ref={anchorRef}
-      >{auth.getUser()}</Button>
+      >{auth.getUser().name}</Button>
       <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow

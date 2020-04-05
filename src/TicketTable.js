@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import MaterialTable from 'material-table';
 import {forwardRef} from 'react';
 
@@ -15,8 +15,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import MultiLine from './MultiLine';
+import AuthContext from './AuthContext';
 
 export default class TicketTable extends React.Component {
+  static contextType = AuthContext;
   _tableIcons = {
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref}/>),
     ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
@@ -66,22 +68,26 @@ export default class TicketTable extends React.Component {
     open: false,
   };
 
-  getActions = () => {
-    return [
+  getActions = (auth) => {
+    return !auth.isLogin() ? [] : [
       rowData => ({
         icon: () => <DoneRounded/>,
         tooltip: '已售出',
         onClick: () => this.setState({ open: true }),
-        hidden: rowData.number === 1,
+        hidden: !this.canDoRowAction(auth, rowData),
       }),
       rowData => ({
         icon: () => <Edit/>,
         tooltip: '編輯',
         onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
-        hidden: rowData.number === 1,
+        hidden: !this.canDoRowAction(auth, rowData),
       }),
     ];
   };
+
+  canDoRowAction(auth, rowData) {
+    return auth.getUser().id === rowData.postedBy.id;
+  }
 
   render() {
     const handleClose = () => {
@@ -102,7 +108,7 @@ export default class TicketTable extends React.Component {
             header: { actions: "修改" },
             body: { emptyDataSourceMessage: "還沒有資料耶" },
           }}
-          actions={this.getActions()}
+          actions={this.getActions(this.context)}
         />
         <Dialog
           open={this.state.open}

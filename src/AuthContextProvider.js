@@ -23,7 +23,7 @@ export default (props) => {
     return auth;
   };
 
-  const getUser = () => auth ? auth.user.name : null;
+  const getUser = () => auth ? auth.user : null;
   const getToken = () => auth ? auth.token : null;
 
   return (
