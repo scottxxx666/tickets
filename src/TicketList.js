@@ -8,7 +8,7 @@ import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 import {Link} from 'react-router-dom';
 import {useRouteMatch, useParams} from 'react-router-dom';
 import {gql} from 'apollo-boost';
-import {useQuery} from '@apollo/react-hooks';
+import {useMutation, useQuery} from '@apollo/react-hooks';
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -45,11 +45,52 @@ const FEED_QUERY = gql`
     }
 `;
 
+const UPDATE_TICKET = gql`
+    mutation UpdateTicket(
+        $id:ID!
+        $area: String!
+        $seat: String!
+        $number: Int!
+        $price: Int!
+        $payment: String!
+        $note: String
+        $contactInformation: [ContactInformationInput!]
+        $eventId: ID!
+    ) {
+        updateTicket(
+            id: $id
+            input: {
+                status: DONE
+                area: $area
+                seat: $seat
+                number: $number
+                price: $price
+                payment: $payment
+                note: $note
+                contactInformation: $contactInformation
+                event: {
+                    id: $eventId
+                }
+            }) {
+            id
+        }
+    }
+`;
+
 export default function () {
   const classes = useStyles();
   const match = useRouteMatch();
   const { eventId } = useParams();
   const { loading, error, data } = useQuery(FEED_QUERY, { variables: { eventId } });
+
+  const [updateTicket, { error2 }] = useMutation(UPDATE_TICKET, {
+    onCompleted: (data) => {
+      refetch();
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+  });
 
   const { tickets } = data || [];
   return (
@@ -67,7 +108,7 @@ export default function () {
         </Link>
       </Grid>
       </Grid>
-      <TicketTable tickets={tickets}/>
+      <TicketTable tickets={tickets} updateTicket={updateTicket}/>
     </Container>
   );
 }

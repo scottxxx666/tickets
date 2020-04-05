@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 
-export default ({ open, handleClose, desc }) => {
+export default ({ open, handleClose, desc, handleConfirm }) => {
   return (
     <Dialog
       open={open}
@@ -22,7 +22,7 @@ export default ({ open, handleClose, desc }) => {
         <Button onClick={handleClose} color="primary">
           取消
         </Button>
-        <Button onClick={handleClose} color="primary" autoFocus>
+        <Button onClick={handleConfirm} color="primary" autoFocus>
           確定
         </Button>
       </DialogActions>

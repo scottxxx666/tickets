@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React, {forwardRef} from 'react';
 import MaterialTable from 'material-table';
-import {forwardRef} from 'react';
 
 import ArrowDownward from '@material-ui/icons/ArrowDownwardRounded';
 import Clear from '@material-ui/icons/ClearRounded';
@@ -10,7 +9,8 @@ import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
 import MultiLine from './common/MultiLine';
 import AuthContext from './AuthContext';
-import ConfirmDialog from './common/ConfirmAlert';
+import ConfirmAlert from './common/ConfirmAlert';
+import {removePrivateFields} from './utils/object';
 
 export default class TicketTable extends React.Component {
   static contextType = AuthContext;
@@ -29,7 +29,7 @@ export default class TicketTable extends React.Component {
     }, {
       title: "狀態",
       field: "status",
-      lookup: { WAITING: "讓票中", END: "已結束" },
+      lookup: { WAITING: "讓票中", DONE: "已結束" },
       defaultFilter: ["WAITING"],
     }, {
       title: "區域",
@@ -61,15 +61,18 @@ export default class TicketTable extends React.Component {
   ];
   state = {
     open: false,
+    ticket: null,
   };
 
   getActions = (auth) => {
     return !auth.isLogin() ? [] : [
       rowData => ({
         icon: () => <DoneRounded/>,
-        tooltip: '已售出',
-        onClick: () => this.setState({ open: true }),
-        hidden: !this.canDoRowAction(auth, rowData),
+        tooltip: '已結束',
+        onClick: () => {
+          this.setState({ open: true, ticket: rowData });
+        },
+        hidden: !this.canDoRowAction(auth, rowData) || rowData.status === 'DONE',
       }),
       rowData => ({
         icon: () => <Edit/>,
@@ -84,10 +87,23 @@ export default class TicketTable extends React.Component {
     return auth.getUser().id === rowData.postedBy.id;
   }
 
+  endTicket = () => {
+    this.props.updateTicket({
+      variables: {
+        ...this.state.ticket,
+        eventId: this.state.ticket.event.id,
+        status: 'DONE',
+        contactInformation: this.state.ticket.contactInformation.map(removePrivateFields),
+      },
+    });
+    this.closeConfirm();
+  };
+
+  closeConfirm = () => {
+    this.setState({ open: false });
+  };
+
   render() {
-    const handleClose = () => {
-      this.setState({ open: false });
-    };
     return (
       <React.Fragment>
         <MaterialTable
@@ -105,7 +121,12 @@ export default class TicketTable extends React.Component {
           }}
           actions={this.getActions(this.context)}
         />
-        <ConfirmDialog open={this.state.open} handleClose={handleClose} desc={"確定要將售票狀態改為“已結束”嗎？"}/>
+        <ConfirmAlert
+          open={this.state.open}
+          handleClose={this.closeConfirm}
+          desc={"確定要將售票狀態改為“已結束”嗎？"}
+          handleConfirm={this.endTicket}
+        />
       </React.Fragment>
     );
   }
