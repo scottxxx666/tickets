@@ -5,8 +5,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
-import {Link} from 'react-router-dom';
-import {useRouteMatch, useParams} from 'react-router-dom';
+import {Link, useRouteMatch, useParams, useHistory} from 'react-router-dom';
 import {gql} from 'apollo-boost';
 import {useMutation, useQuery} from '@apollo/react-hooks';
 
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 const FEED_QUERY = gql`
     query GetTickets($eventId: ID!) {
-        tickets(eventId:$eventId) {
+        tickets(eventId: $eventId) {
             id
             status
             area
@@ -91,6 +90,7 @@ export default function () {
       console.error(e);
     },
   });
+  const history = useHistory();
 
   const { tickets } = data || [];
   return (
@@ -100,15 +100,16 @@ export default function () {
         container
         direction="row"
         justify="flex-end"
-      ><Grid item xs={1}>
-        <Link to={`${match.url}/create`}>
-          <Button variant="contained" color="primary">
-            <AddBoxRoundedIcon className={classes.icon}/> 新增
-          </Button>
-        </Link>
+      >
+        <Grid item xs={1}>
+          <Link to={`${match.url}/create`}>
+            <Button variant="contained" color="primary">
+              <AddBoxRoundedIcon className={classes.icon}/> 新增
+            </Button>
+          </Link>
+        </Grid>
       </Grid>
-      </Grid>
-      <TicketTable tickets={tickets} updateTicket={updateTicket}/>
+      <TicketTable tickets={tickets} updateTicket={updateTicket} history={history}/>
     </Container>
   );
 }

@@ -77,7 +77,7 @@ export default class TicketTable extends React.Component {
       rowData => ({
         icon: () => <Edit/>,
         tooltip: '編輯',
-        onClick: (event, rowData) => alert("You saved " + rowData.updatedAt),
+        onClick: (event, rowData) => this.props.history.push('tickets/' + rowData.id),
         hidden: !this.canDoRowAction(auth, rowData),
       }),
     ];

@@ -9,6 +9,7 @@ import AppTopBar from './AppTopBar';
 import ScrollTop from './ScrollTop';
 import PrivateRoute from './PrivateRoute';
 import ApolloProvider from './ApolloProvider';
+import TicketUpdate from './TicketUpdate';
 
 export default () => {
   dotenv.config();
@@ -28,6 +29,9 @@ export default () => {
               </Route>
               <PrivateRoute path="/event/:eventId/tickets/create">
                 <TicketCreate/>
+              </PrivateRoute>
+              <PrivateRoute path="/event/:eventId/tickets/:ticketId">
+                <TicketUpdate/>
               </PrivateRoute>
               <Route path="/event/:eventId/tickets">
                 <TicketList/>
