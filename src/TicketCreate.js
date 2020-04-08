@@ -37,7 +37,18 @@ const CREATE_TICKET = gql`
 export default function () {
   const { eventId } = useParams();
   const history = useHistory();
-  const [ticket, setTicket] = useState({ number: 1 });
+  const [ticket, setTicket] = useState({
+    area: null,
+    seat: null,
+    number: 1,
+    price: null,
+    payment: null,
+    note: '',
+    contactInformation: [
+      { platform: 'PTT', platformId: '' },
+      { platform: 'LINE', platformId: '' },
+    ],
+  });
   const [contactInformation, setContactInformation] = useState([]);
   const [createTicket, { error }] = useMutation(CREATE_TICKET, {
     variables: {
@@ -81,6 +92,8 @@ export default function () {
         handleContactChange,
         submit,
         error,
+        ticket,
+        title: '新增一筆售票資料',
       })}
     />
   );
