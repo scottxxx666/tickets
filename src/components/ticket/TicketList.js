@@ -80,7 +80,10 @@ export default function () {
   const classes = useStyles();
   const match = useRouteMatch();
   const { eventId } = useParams();
-  const { data, refetch } = useQuery(GET_TICKETS, { variables: { eventId } });
+  const { data, refetch } = useQuery(GET_TICKETS, {
+    variables: { eventId },
+    fetchPolicy: 'no-cache',
+  });
 
   const [updateTicket] = useMutation(UPDATE_TICKET, {
     onCompleted: (data) => {
