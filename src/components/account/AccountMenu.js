@@ -7,7 +7,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import React, {useContext, useState} from 'react';
-import AuthContext from '../../AuthContext';
+import AuthContext from '../auth/AuthContext';
 
 const AccountMenu = () => {
   const [open, setOpen] = useState(false);

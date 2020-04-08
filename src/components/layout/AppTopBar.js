@@ -4,7 +4,7 @@ import React, {Fragment, useContext} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import AuthContext from '../../AuthContext';
+import AuthContext from '../auth/AuthContext';
 import AccountMenu from '../account/AccountMenu';
 import AccountCircle from '../account/AccountCircle';
 

@@ -8,7 +8,7 @@ import FilterList from '@material-ui/icons/FilterListRounded';
 import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
 import MultiLine from '../common/MultiLine';
-import AuthContext from '../../AuthContext';
+import AuthContext from '../auth/AuthContext';
 import ConfirmAlert from '../common/ConfirmAlert';
 import {removePrivateFields} from '../../utils/object';
 
