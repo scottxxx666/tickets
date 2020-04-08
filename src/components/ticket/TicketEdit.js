@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import TicketForm from './TicketForm';
-import {removePrivateFields} from './utils/object';
+import {removePrivateFields} from '../../utils/object';
 
 export default function (props) {
   const defaultTicket = props.default;
