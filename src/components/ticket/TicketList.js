@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const FEED_QUERY = gql`
+const GET_TICKETS = gql`
     query GetTickets($eventId: ID!) {
         tickets(eventId: $eventId) {
             id
@@ -80,9 +80,9 @@ export default function () {
   const classes = useStyles();
   const match = useRouteMatch();
   const { eventId } = useParams();
-  const { loading, error, data, refetch } = useQuery(FEED_QUERY, { variables: { eventId } });
+  const { data, refetch } = useQuery(GET_TICKETS, { variables: { eventId } });
 
-  const [updateTicket, { error2 }] = useMutation(UPDATE_TICKET, {
+  const [updateTicket] = useMutation(UPDATE_TICKET, {
     onCompleted: (data) => {
       refetch();
     },

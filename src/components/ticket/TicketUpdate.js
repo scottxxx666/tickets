@@ -66,11 +66,11 @@ export default () => {
   const history = useHistory();
   const { ticketId, eventId } = useParams();
 
-  const { loading, error, data } = useQuery(GET_TICKET, {
+  const { loading, data } = useQuery(GET_TICKET, {
     variables: { id: ticketId },
     fetchPolicy: 'no-cache',
   });
-  const [saveTicket, { error2 }] = useMutation(UPDATE_TICKET, {
+  const [saveTicket, { error }] = useMutation(UPDATE_TICKET, {
     onCompleted: (data) => {
       history.push(`/event/${eventId}/tickets`);
     },
