@@ -1,6 +1,6 @@
 import {ApolloProvider} from '@apollo/react-hooks';
 import React, {useContext} from 'react';
-import AuthContext from './components/auth/AuthContext';
+import AuthContext from './auth/AuthContext';
 import ApolloClient from 'apollo-boost';
 
 export default (props) => {

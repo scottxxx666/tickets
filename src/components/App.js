@@ -1,15 +1,15 @@
 import React from 'react';
-import TicketList from './components/ticket/TicketList';
+import TicketList from './ticket/TicketList';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-import TicketCreate from './components/ticket/TicketCreate';
-import Login from './components/auth/Login';
+import TicketCreate from './ticket/TicketCreate';
+import Login from './auth/Login';
 import dotenv from 'dotenv';
-import AuthContextProvider from './components/auth/AuthContextProvider';
-import AppTopBar from './components/layout/AppTopBar';
-import ScrollTop from './components/layout/ScrollTop';
-import PrivateRoute from './PrivateRoute';
+import AuthContextProvider from './auth/AuthContextProvider';
+import AppTopBar from './layout/AppTopBar';
+import ScrollTop from './layout/ScrollTop';
+import PrivateRoute from './common/PrivateRoute';
 import ApolloProvider from './ApolloProvider';
-import TicketUpdate from './components/ticket/TicketUpdate';
+import TicketUpdate from './ticket/TicketUpdate';
 
 export default () => {
   dotenv.config();
