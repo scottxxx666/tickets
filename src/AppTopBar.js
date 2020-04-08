@@ -5,8 +5,8 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import AuthContext from './AuthContext';
-import AccountMenu from './AccountMenu';
-import AccountCircle from './AccountCircle';
+import AccountMenu from './components/account/AccountMenu';
+import AccountCircle from './components/account/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
