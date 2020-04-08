@@ -1,17 +1,9 @@
 import * as React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import {useState} from 'react';
 import {gql} from 'apollo-boost';
 import {useMutation} from '@apollo/react-hooks';
-import {useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import TicketForm from './TicketForm';
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    minWidth: 700,
-    padding: theme.spacing(5),
-  },
-}));
 
 const CREATE_TICKET = gql`
     mutation CreateTicket(
@@ -43,7 +35,6 @@ const CREATE_TICKET = gql`
 `;
 
 export default function () {
-  const classes = useStyles();
   const { eventId } = useParams();
   const history = useHistory();
   const [ticket, setTicket] = useState({ number: 1 });
@@ -83,11 +74,14 @@ export default function () {
     return createTicket();
   }
 
-  const props = {
-    classes,
-    handleChange,
-    handleContactChange,
-    submit,
-  };
-  return <TicketForm {...props} error={error}/>;
+  return (
+    <TicketForm
+      {...({
+        handleChange,
+        handleContactChange,
+        submit,
+        error,
+      })}
+    />
+  );
 }

@@ -6,15 +6,24 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import TextInputRow from './common/TextInputRow';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
-export default function ({ classes, handleChange, handleContactChange, submit, error }) {
+export default function ({ handleChange, handleContactChange, submit, error, ticket }) {
+  const useStyles = makeStyles(theme => ({
+    form: {
+      minWidth: 700,
+      padding: theme.spacing(5),
+    },
+  }));
+  const classes = useStyles();
+
   if (error) {
     alert('抱歉，網路錯誤，麻煩稍後再試。');
   }
   return (
     <Grid container justify="center">
       <Card>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <CardContent>
             <Grid container justify="center">
               <Typography variant="h5" component="h2">
