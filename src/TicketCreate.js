@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {useState} from 'react';
 import {gql} from 'apollo-boost';
 import {useMutation} from '@apollo/react-hooks';
 import {useHistory, useParams} from 'react-router-dom';
-import TicketForm from './TicketForm';
+import TicketEdit from './TicketEdit';
 
 const CREATE_TICKET = gql`
     mutation CreateTicket(
@@ -37,27 +36,7 @@ const CREATE_TICKET = gql`
 export default function () {
   const { eventId } = useParams();
   const history = useHistory();
-  const [ticket, setTicket] = useState({
-    area: null,
-    seat: null,
-    number: 1,
-    price: null,
-    payment: null,
-    note: '',
-    contactInformation: [
-      { platform: 'PTT', platformId: '' },
-      { platform: 'LINE', platformId: '' },
-    ],
-  });
-  const [contactInformation, setContactInformation] = useState([]);
-  const [createTicket, { error }] = useMutation(CREATE_TICKET, {
-    variables: {
-      eventId: eventId,
-      ...ticket,
-      number: parseInt(ticket.number, 10),
-      price: parseInt(ticket.price, 10),
-      contactInformation,
-    },
+  const [saveTicket, { error }] = useMutation(CREATE_TICKET, {
     onCompleted: (data) => {
       history.push(`/event/${eventId}/tickets`);
     },
@@ -66,34 +45,13 @@ export default function () {
     },
   });
 
-  function handleChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    setTicket(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  function handleContactChange(event) {
-    const platform = event.target.dataset.platform;
-    const platformId = event.target.value;
-    setContactInformation(prev => [...prev.filter(e => e.platform !== platform), { platform, platformId }]);
-  }
-
-  async function submit() {
-    return createTicket();
-  }
-
   return (
-    <TicketForm
+    <TicketEdit
       {...({
-        handleChange,
-        handleContactChange,
-        submit,
         error,
-        ticket,
         title: '新增一筆售票資料',
+        eventId,
+        saveTicket,
       })}
     />
   );
