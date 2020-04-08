@@ -4,9 +4,9 @@ import React, {Fragment, useContext} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import AuthContext from './AuthContext';
-import AccountMenu from './components/account/AccountMenu';
-import AccountCircle from './components/account/AccountCircle';
+import AuthContext from '../../AuthContext';
+import AccountMenu from '../account/AccountMenu';
+import AccountCircle from '../account/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
