@@ -7,9 +7,9 @@ import Search from '@material-ui/icons/SearchRounded';
 import FilterList from '@material-ui/icons/FilterListRounded';
 import Edit from '@material-ui/icons/Edit';
 import DoneRounded from '@material-ui/icons/DoneRounded';
-import MultiLine from './common/MultiLine';
+import MultiLine from './components/common/MultiLine';
 import AuthContext from './AuthContext';
-import ConfirmAlert from './common/ConfirmAlert';
+import ConfirmAlert from './components/common/ConfirmAlert';
 import {removePrivateFields} from './utils/object';
 
 export default class TicketTable extends React.Component {

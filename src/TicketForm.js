@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import TextInputRow from './common/TextInputRow';
+import TextInputRow from './components/common/TextInputRow';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const getPlatformId = (contactInformation, platform) => {
