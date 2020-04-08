@@ -80,7 +80,7 @@ export default function () {
   const classes = useStyles();
   const match = useRouteMatch();
   const { eventId } = useParams();
-  const { loading, error, data } = useQuery(FEED_QUERY, { variables: { eventId } });
+  const { loading, error, data, refetch } = useQuery(FEED_QUERY, { variables: { eventId } });
 
   const [updateTicket, { error2 }] = useMutation(UPDATE_TICKET, {
     onCompleted: (data) => {
