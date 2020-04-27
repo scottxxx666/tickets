@@ -7,6 +7,9 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import TextInputRow from '../common/TextInputRow';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import {useEffect} from 'react';
+import {useState} from 'react';
+import Alert from '../common/Alert';
 
 const getPlatformId = (contactInformation, platform) => {
   const contact = contactInformation.find(e => e.platform === platform);
@@ -22,11 +25,17 @@ export default function ({ handleChange, handleContactChange, submit, error, tic
   }));
   const classes = useStyles();
 
-  if (error) {
-    alert('抱歉，網路錯誤，麻煩稍後再試。');
-  }
+  const [showError, setShowError] = useState(false);
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    }
+  }, [error]);
+
   return (
     <Grid container justify="center">
+      <Alert open={showError} handleClose={() => setShowError(false)} desc={'抱歉，網路錯誤，麻煩稍後再試。'}
+             handleConfirm={() => setShowError(false)}/>
       <Card>
         <form className={classes.form}>
           <CardContent>
