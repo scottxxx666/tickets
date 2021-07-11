@@ -80,14 +80,52 @@ export default function () {
   const classes = useStyles();
   const match = useRouteMatch();
   const { eventId } = useParams();
-  const { data, refetch } = useQuery(GET_TICKETS, {
-    variables: { eventId },
-    fetchPolicy: 'no-cache',
-  });
+  // const { data, refetch } = useQuery(GET_TICKETS, {
+  //   variables: { eventId },
+  //   fetchPolicy: 'no-cache',
+  //   pollInterval: 6000,
+  // });
+  const data = {
+    tickets: [
+      {
+        note: '文湖線',
+        payment: '面交',
+        price: 3500,
+        number: 1,
+        seat: '35 排 12 號',
+        status: 'WAITING',
+        area: '1A',
+        contactInformation: [{ platform: 'PTT', platformId: 'aaaaaa' }],
+        updatedAt: '1625985366000',
+      },
+      {
+        note: '',
+        payment: '匯款',
+        price: 5200,
+        number: 2,
+        seat: '1 排 22, 23 號',
+        status: 'WAITING',
+        area: '1A',
+        contactInformation: [{ platform: 'PTT', platformId: 'bbb' }],
+        updatedAt: '1625984336000',
+      },
+      {
+        note: '',
+        payment: '面交',
+        price: 3500,
+        number: 4,
+        seat: '40 排 12 號',
+        status: 'WAITING',
+        area: '3A',
+        contactInformation: [{ platform: 'FACEBOOK', platformId: 'cccc' }],
+        updatedAt: '1625885366000',
+      },
+    ],
+  };
 
   const [updateTicket] = useMutation(UPDATE_TICKET, {
     onCompleted: (data) => {
-      refetch();
+      // refetch();
     },
     onError: (e) => {
       console.error(e);
