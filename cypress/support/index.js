@@ -13,11 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-import '@applitools/eyes-cypress/commands'
+import '@applitools/eyes-cypress/commands';
 
+import '@percy/cypress';
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
